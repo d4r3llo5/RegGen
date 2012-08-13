@@ -22,7 +22,8 @@ namespace RegGen
          */
         private void createDSN()
         {
-
+            Console.WriteLine("Enter a name");
+            Console.ReadLine();
         } /* end of method createDSN */
 
         static void Main(string[] args)
