@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegGen", "RegGen\RegGen.csproj", "{70EA2123-B72F-41F2-8000-EC70B7E0A289}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70EA2123-B72F-41F2-8000-EC70B7E0A289}.Debug|x86.ActiveCfg = Debug|x86
+		{70EA2123-B72F-41F2-8000-EC70B7E0A289}.Debug|x86.Build.0 = Debug|x86
+		{70EA2123-B72F-41F2-8000-EC70B7E0A289}.Release|x86.ActiveCfg = Release|x86
+		{70EA2123-B72F-41F2-8000-EC70B7E0A289}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
