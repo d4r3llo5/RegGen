@@ -25,16 +25,8 @@ namespace RegGen
         } /* end of Constructor */
 
         /*
-         * createDSN: creates a DSN file for 
-         *  the user to input into the registry
+         * Static method that starts the program 
          */
-        private void createDSN;
-
-        /*
-         * setDSNName: sets the DSN name
-         */
-        private void setDSNName;
-
         static void Main(string[] args)
         {
 
@@ -44,21 +36,65 @@ namespace RegGen
             newDSN = new DSNGenerator();
             newDSN.createDSN();
 
-            Console.ReadLine();
+            Console.ReadKey();  // pause
         }
 
+        /*
+         * createDSN: creates a DSN file for 
+         *  the user to input into the registry
+         */
         private void createDSN()
         {
-            String dsnName;
-
-            Console.WriteLine("Enter a name");
-            dsnName = Console.ReadLine();
+            setDSNName();   
         } /* end of method createDSN */
 
+        /*
+         * setDSNName: sets the DSN name
+         */
         private void setDSNName()
         {
+            String dsnName; /* the string the DSN will be set to */
+            Boolean isCorrect;  /* Makes sure the user is happy with their choice (default false) */
+
+            isCorrect = false;
+
+                /* loop until  the user is satisfied with their choice */
+            while (!isCorrect)
+            {
+                Console.Write("Enter a name for your DSN: ");
+                dsnName = Console.ReadLine(); /* set the user input to the DSN name */
+                isCorrect = typedCorrect(dsnName);  // check to see if the user was satisfied with their input
+
+                if (isCorrect) structDSN.dsnName = dsnName; // if the dsn name is correct save it to the struct
+
+            } /* end of while loop */
 
         } /* end of method setDSNName */
+
+
+            /* HELPER METHODS */
+        /*
+         * typedCorrect: check to see if the typed String
+         *  is what the user wanted. Returns true/false depending
+         *      String
+         *      strCheck: the string to check for verification
+         *      return: True, user typed in correctly, false try again
+         */
+        private Boolean typedCorrect(String strCheck)
+        {
+            char correct;   /* Char to test their input */
+            String input;   /* Used for sanitation on input */
+
+            Console.Write("Is this input: " + strCheck + ", correct (y/n)?: ");
+            input = Console.ReadLine();    // Read the input
+
+            if (input.Length > 0) correct = (input.ToArray())[0];   // if the input isn't nothing then set it for testing
+            else correct = 'a'; // else ask again
+
+            if (correct == 'y' || correct == 'Y') return true;  // If the user is happy with the name, return and save it
+            else if (correct == 'n' || correct == 'N') return false;    // If the user isn't happy with the name, ask for another input
+            else return typedCorrect(strCheck); // Ask again if the user is happy with the input
+        } /* end of method typedCorrect */
 
     } /* end of class DSNGenerator */
 } /* end if Namespace RegGen */
