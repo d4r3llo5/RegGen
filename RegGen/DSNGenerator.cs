@@ -15,13 +15,14 @@ namespace RegGen
     class DSNGenerator
     {
             /* Class definitions */
+        DSNObject structDSN;    /* the DSN struct */
         /*
          * Constructor:
          */
         public DSNGenerator() 
         {
-
-        }
+            structDSN = new DSNObject();
+        } /* end of Constructor */
 
         /*
          * createDSN: creates a DSN file for 
