@@ -36,10 +36,16 @@ namespace RegGen
 
                 /* Set up a DSN based on user input */
             DSNGenerator newDSN;
+            AddToRegistry addRegistry;
 
             newDSN = new DSNGenerator();
+            addRegistry = new AddToRegistry();
+
             newDSN.createDSN();
             newDSN.createODBC();
+
+            addRegistry.addFilesToRegistry();
+
             Console.ReadKey();  // pause
         }
 
