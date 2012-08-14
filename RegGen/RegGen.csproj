@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DSNStruct.cs" />
     <Compile Include="DSNGenerator.cs" />
+    <Compile Include="ODBCDataSourceFileGen.cs" />
     <Compile Include="ODBCFileGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

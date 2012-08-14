@@ -18,6 +18,8 @@ namespace RegGen
             /* Class definitions */
         DSNObject structDSN;    /* the DSN struct */
         ODBCFileGen objODBCFile; /* the odbc file builder */
+        ODBCDataSourceFile objDataSource; /* the odbc data source builder */
+
         /*
          * Constructor:
          */
@@ -47,6 +49,7 @@ namespace RegGen
         public void createODBC()
         {
             objODBCFile.writeDSNFile();
+            objDataSource.writeDSNFile();
         } /* end of method createODBC */
 
 
@@ -64,6 +67,7 @@ namespace RegGen
             setDSNProperty("login");
 
             objODBCFile = new ODBCFileGen(structDSN);
+            objDataSource = new ODBCDataSourceFile(structDSN);
 
                 /* debugging */
             printDSNInfo();
