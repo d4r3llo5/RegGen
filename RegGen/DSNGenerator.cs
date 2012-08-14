@@ -35,7 +35,6 @@ namespace RegGen
 
             newDSN = new DSNGenerator();
             newDSN.createDSN();
-
             Console.ReadKey();  // pause
         }
 
@@ -45,16 +44,26 @@ namespace RegGen
          */
         private void createDSN()
         {
-            setDSNName();
-            setDSNPath();
+            setDSNProperty("dsn name");
+            setDSNProperty("dsn description");
+            setDSNProperty("server location");
+            setDSNProperty("database");
+            setDSNProperty("32bit");
+            setDSNProperty("login");
+
+            printDSNInfo();
         } /* end of method createDSN */
 
         /*
-         * setDSNName: sets the DSN name
+         * setDSNProperty: sets the DSN properties, based on the input String
+         *  (Program based), the property being modified will change,
+         *      without the need for sanity checking
+         *      String
+         *          property
          */
-        private void setDSNName()
+        private void setDSNProperty(String property)
         {
-            String dsnName; /* the string the DSN will be set to */
+            String dsnProperty; /* the string the DSN will be set to */
             Boolean isCorrect;  /* Makes sure the user is happy with their choice (default false) */
 
             isCorrect = false;
@@ -62,37 +71,16 @@ namespace RegGen
                 /* loop until  the user is satisfied with their choice */
             while (!isCorrect)
             {
-                Console.Write("Enter a name for your DSN: ");
-                dsnName = Console.ReadLine(); /* set the user input to the DSN name */
-                isCorrect = typedCorrect(dsnName);  // check to see if the user was satisfied with their input
+                Console.Write("Enter a " + property + " for your new DSN: ");
+                dsnProperty = Console.ReadLine(); /* set the user input to the DSN name */
+                isCorrect = typedCorrect(dsnProperty);  // check to see if the user was satisfied with their input
 
-                if (isCorrect) structDSN.dsnName = dsnName; // if the dsn name is correct save it to the struct
+                if (isCorrect) setDSNValue(property, dsnProperty); // if the dsn name is correct save it to the struct
 
             } /* end of while loop */
 
-        } /* end of method setDSNName */
+        } /* end of method setDSNProperty */
 
-        /*
-         * setDSNPath: sets the DSN path to the server
-         */
-        private void setDSNPath()
-        {
-            String dsnName; /* the string the DSN path will be set to */
-            Boolean isCorrect;  /* Makes sure the user is happy with their choice (default false) */
-
-            isCorrect = false;
-
-            /* loop until  the user is satisfied with their choice */
-            while (!isCorrect)
-            {
-                Console.Write("Enter a name for your DSN path: ");
-                dsnName = Console.ReadLine(); /* set the user input to the DSN name */
-                isCorrect = typedCorrect(dsnName);  // check to see if the user was satisfied with their input
-
-                if (isCorrect) structDSN.dsnConnection = dsnName; // if the dsn name is correct save it to the struct
-            } /* end of while loop */
-
-        } /* end of method setDSNPath */
 
             /* HELPER METHODS */
         /*
@@ -117,6 +105,54 @@ namespace RegGen
             else if (correct == 'n' || correct == 'N') return false;    // If the user isn't happy with the name, ask for another input
             else return typedCorrect(strCheck); // Ask again if the user is happy with the input
         } /* end of method typedCorrect */
+
+        /*
+         * setDSNValue: Sets the DSN value based on which input it is
+         *      String, String
+         *          property: the property that you're changing
+         *          strValue: the value that you're setting it to
+         */
+        private void setDSNValue(String property, String strValue)
+        {
+                /* Determines which property to set the value to */
+            switch (property)
+            {
+                case "dsn name": structDSN.dsnName = strValue; break;
+                case "dsn description": structDSN.dsnDesc = strValue; break;
+                case "server location": structDSN.dsnConnection = strValue; break;
+                case "database": structDSN.dsnDatabase = strValue; break;
+                case "32 bit": setBitType(property); break;
+                case "login": structDSN.dsnLogin = strValue; break;
+            } /* end of case */
+        } /* end of method setDSNValue */
+
+        /*
+         * setBitType: sets the DSN type to either 32 bit (true), or 64 bit (false)
+         *      String
+         *          property: the determining String for which bit to set
+         */
+        private void setBitType(String property)
+        {
+            if (property == "32bit") structDSN.whichBit = true;
+            else structDSN.whichBit = false; 
+        } /* end of method setBitType */
+
+            /* Debugging methods */
+
+        /*
+         * printDSNInfo: prints the completed DSN info
+         */
+        private void printDSNInfo()
+        {
+            Console.WriteLine(structDSN.dsnName);
+            Console.WriteLine(structDSN.dsnDesc);
+            Console.WriteLine(structDSN.dsnConnection);
+            Console.WriteLine(structDSN.dsnDatabase);
+            Console.WriteLine(structDSN.dsnLogin);
+            
+            if(structDSN.whichBit) Console.WriteLine("32 Bit machine");
+            else Console.WriteLine("64 Bit machine");
+        } /* end of method printDSNInfo */
 
     } /* end of class DSNGenerator */
 } /* end if Namespace RegGen */
