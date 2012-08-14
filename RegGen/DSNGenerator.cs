@@ -10,12 +10,14 @@ namespace RegGen
     /*
      * DSN Generator
      *  type: Class
-     *      Creates a DSN reg file for the user
+     *      Creates a DSN object 
+     *      to ready to output to a file
      */
     class DSNGenerator
     {
             /* Class definitions */
         DSNObject structDSN;    /* the DSN struct */
+        ODBCFileGen objODBCFile; /* the odbc file builder */
         /*
          * Constructor:
          */
@@ -35,8 +37,18 @@ namespace RegGen
 
             newDSN = new DSNGenerator();
             newDSN.createDSN();
+            newDSN.createODBC();
             Console.ReadKey();  // pause
         }
+
+        /*
+         * createODBC: creates the file
+         */
+        public void createODBC()
+        {
+            objODBCFile.writeDSNFile();
+        } /* end of method createODBC */
+
 
         /*
          * createDSN: creates a DSN file for 
@@ -48,9 +60,12 @@ namespace RegGen
             setDSNProperty("dsn description");
             setDSNProperty("server location");
             setDSNProperty("database");
-            setDSNProperty("32bit");
+            setDSNProperty("(32 bit / 64 bit)");
             setDSNProperty("login");
 
+            objODBCFile = new ODBCFileGen(structDSN);
+
+                /* debugging */
             printDSNInfo();
         } /* end of method createDSN */
 
@@ -121,7 +136,7 @@ namespace RegGen
                 case "dsn description": structDSN.dsnDesc = strValue; break;
                 case "server location": structDSN.dsnConnection = strValue; break;
                 case "database": structDSN.dsnDatabase = strValue; break;
-                case "32 bit": setBitType(property); break;
+                case "(32 bit / 64 bit)": setBitType(property); break;
                 case "login": structDSN.dsnLogin = strValue; break;
             } /* end of case */
         } /* end of method setDSNValue */
@@ -133,7 +148,7 @@ namespace RegGen
          */
         private void setBitType(String property)
         {
-            if (property == "32bit") structDSN.whichBit = true;
+            if (property == "32") structDSN.whichBit = true;
             else structDSN.whichBit = false; 
         } /* end of method setBitType */
 
