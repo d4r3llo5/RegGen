@@ -77,7 +77,6 @@ namespace RegGen
          */
         private void setDSNPath()
         {
-
             String dsnName; /* the string the DSN path will be set to */
             Boolean isCorrect;  /* Makes sure the user is happy with their choice (default false) */
 
