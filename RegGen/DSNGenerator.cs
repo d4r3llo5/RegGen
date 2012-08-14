@@ -140,7 +140,7 @@ namespace RegGen
             /* Debugging methods */
 
         /*
-         * printDSNInfo: prints the completed DSN info
+         * printDSNInfo: prints the completed DSN info 
          */
         private void printDSNInfo()
         {
