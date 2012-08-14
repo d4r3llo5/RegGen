@@ -45,7 +45,8 @@ namespace RegGen
          */
         private void createDSN()
         {
-            setDSNName();   
+            setDSNName();
+            setDSNPath();
         } /* end of method createDSN */
 
         /*
