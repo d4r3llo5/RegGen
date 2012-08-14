@@ -76,7 +76,22 @@ namespace RegGen
          */
         private void setDSNPath()
         {
-         
+
+            String dsnName; /* the string the DSN path will be set to */
+            Boolean isCorrect;  /* Makes sure the user is happy with their choice (default false) */
+
+            isCorrect = false;
+
+            /* loop until  the user is satisfied with their choice */
+            while (!isCorrect)
+            {
+                Console.Write("Enter a name for your DSN path: ");
+                dsnName = Console.ReadLine(); /* set the user input to the DSN name */
+                isCorrect = typedCorrect(dsnName);  // check to see if the user was satisfied with their input
+
+                if (isCorrect) structDSN.dsnConnection = dsnName; // if the dsn name is correct save it to the struct
+            } /* end of while loop */
+
         } /* end of method setDSNPath */
 
             /* HELPER METHODS */
