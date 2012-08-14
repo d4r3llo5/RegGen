@@ -71,6 +71,13 @@ namespace RegGen
 
         } /* end of method setDSNName */
 
+        /*
+         * setDSNPath: sets the DSN path to the server
+         */
+        private void setDSNPath()
+        {
+         
+        } /* end of method setDSNPath */
 
             /* HELPER METHODS */
         /*
