@@ -76,7 +76,7 @@ namespace RegGen
          */
         private void setDSNPath()
         {
-            
+            Console.WriteLine("Hello, this will give them some problems");
         } /* end of method setDSNPath */
 
             /* HELPER METHODS */
